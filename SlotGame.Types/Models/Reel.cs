@@ -18,6 +18,9 @@ namespace SlotGame.Types.Models
         [DataMember]
         public virtual IList<Symbol> Symbols { get; set; }
         [DataMember]
+        public string SymbolOrder { get; set; }
+
+        [DataMember]
         public int? SlotId { get; set; } = null;
         [IgnoreDataMember]
         [ForeignKey("SlotId")]

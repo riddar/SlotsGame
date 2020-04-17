@@ -15,11 +15,11 @@ namespace SlotGame.Types.Models
         [DataMember]
         public double Balance { get; set; }
         [DataMember]
-        public double BetAmount { get; set; }
+        public double? BetAmount { get; set; }
         [DataMember]
-        public double CreditsWon { get; set; }
+        public double? CreditsWon { get; set; }
         [DataMember]
-        public double CreditsLost { get; set; }
+        public double? CreditsLost { get; set; }
         [DataMember]
         public virtual IList<Slot> Slots { get; set; }
     }

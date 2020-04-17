@@ -18,9 +18,9 @@ namespace SlotGame.API.Controllers
         public ReelsController(SlotGameDbContext context) => _context = context;
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Reel>>> GetReels() => await _context.Reels.ToListAsync();
+        public async Task<ActionResult<IEnumerable<Reel>>> GetReels() => await _context.Reels.Include(r => r.Symbols).ToListAsync();
 
-        [HttpGet("GetReelsBySlotId")]
+        [HttpGet("GetReelsBySlotId/{id}")]
         public async Task<ActionResult<IEnumerable<Reel>>> GetReelsBySlotId(int id) => await _context.Reels.Where(r => r.SlotId == id).ToListAsync();
 
         [HttpGet("{id}")]

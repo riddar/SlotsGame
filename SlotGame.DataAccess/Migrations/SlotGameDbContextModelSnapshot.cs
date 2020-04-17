@@ -270,11 +270,56 @@ namespace SlotGame.DataAccess.Migrations
                     b.Property<bool>("Spin")
                         .HasColumnType("bit");
 
+                    b.Property<string>("SymbolOrder")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SlotId");
 
                     b.ToTable("Reels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SlotId = 1,
+                            Speed = 0,
+                            Spin = false,
+                            SymbolOrder = "1113411134111"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            SlotId = 1,
+                            Speed = 0,
+                            Spin = false,
+                            SymbolOrder = "0123402340340"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SlotId = 1,
+                            Speed = 0,
+                            Spin = false,
+                            SymbolOrder = "0123434034000"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            SlotId = 1,
+                            Speed = 0,
+                            Spin = false,
+                            SymbolOrder = "1111111111111"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            SlotId = 1,
+                            Speed = 0,
+                            Spin = false,
+                            SymbolOrder = "1111111111111"
+                        });
                 });
 
             modelBuilder.Entity("SlotGame.Types.Models.Slot", b =>
@@ -295,6 +340,14 @@ namespace SlotGame.DataAccess.Migrations
                     b.HasIndex("WalletId");
 
                     b.ToTable("Slots");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            WalletId = 1,
+                            startSpin = false
+                        });
                 });
 
             modelBuilder.Entity("SlotGame.Types.Models.Symbol", b =>
@@ -320,6 +373,13 @@ namespace SlotGame.DataAccess.Migrations
                     b.HasIndex("ReelId");
 
                     b.ToTable("Symbols");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ReelId = 1
+                        });
                 });
 
             modelBuilder.Entity("SlotGame.Types.Models.Wallet", b =>
@@ -332,18 +392,25 @@ namespace SlotGame.DataAccess.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
-                    b.Property<double>("BetAmount")
+                    b.Property<double?>("BetAmount")
                         .HasColumnType("float");
 
-                    b.Property<double>("CreditsLost")
+                    b.Property<double?>("CreditsLost")
                         .HasColumnType("float");
 
-                    b.Property<double>("CreditsWon")
+                    b.Property<double?>("CreditsWon")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
                     b.ToTable("Wallets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Balance = 5000.0
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -420,11 +487,11 @@ namespace SlotGame.DataAccess.Migrations
 
             modelBuilder.Entity("SlotGame.Types.Models.Symbol", b =>
                 {
-                    b.HasOne("SlotGame.Types.Models.Payout", null)
+                    b.HasOne("SlotGame.Types.Models.Payout", "Payout")
                         .WithMany("Symbols")
                         .HasForeignKey("PayoutId");
 
-                    b.HasOne("SlotGame.Types.Models.Reel", null)
+                    b.HasOne("SlotGame.Types.Models.Reel", "Reel")
                         .WithMany("Symbols")
                         .HasForeignKey("ReelId");
                 });

@@ -17,5 +17,17 @@ namespace SlotGame.Types.Models
         [DataMember]
         [NotMapped]
         public int[] Multipliers { get; set; }
+
+        [DataMember]
+        public int? ReelId { get; set; } = null;
+        [IgnoreDataMember]
+        [ForeignKey("ReelId")]
+        public Reel Reel { get; set; }
+
+        [DataMember]
+        public int? PayoutId { get; set; } = null;
+        [IgnoreDataMember]
+        [ForeignKey("PayoutId")]
+        public Payout Payout { get; set; }
     }
 }
